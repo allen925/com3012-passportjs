@@ -1,0 +1,44 @@
+<h1>Dashboard</h1>
+<p>Welcome <%= req.user.name %></p>
+<h2>Current Active Sessions:</h2>
+<ul>
+    <% userSessions.forEach(function(session) { %>
+        <li>
+            SessionID: <%= session.sessionId %><br>
+            UserID: <%= session.userId %>
+            <form onsubmit="return revokeSession('<%= session.sessionId%>', '<%=session.userId%>')">
+                <input type="hidden" name="sessionId" value="<%= session.sessionId %>" />
+                <button type="submit">Revoke Session</button>
+            </form>
+        </li>
+    <% }); %>
+</ul>
+<a href="/auth/logout" class="btn btn-secondary">Logout</a>
+
+<script>
+    function revokeSession(sessionId, userId) {
+        event.preventDefault(); 
+        fetch('/admin/revoke', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify({ sessionId: sessionId, userId: userId })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert('Session revoked successfully.');
+                // Remove the session from the list in the UI
+                document.querySelector(`input[value="${sessionId}"]`).closest('li').remove();
+            } else {
+                alert('Failed to revoke session: ' + data.message);
+            }
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+            alert('Error revoking session');
+        });
+    }
+</script>
