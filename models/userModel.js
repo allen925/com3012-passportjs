@@ -52,7 +52,8 @@ const userModel = {
     }
     user.id = database.length + 1;
     user.login = oauth
-    user.token = token
+    if (!!token)
+      user.token = token
     database.push(user);
     return user;
   }, 
@@ -64,6 +65,9 @@ const userModel = {
     }
     existingUser.token = token; 
     return existingUser;
+  },
+  getDatabase: () => {
+    return database;
   }
 };
 

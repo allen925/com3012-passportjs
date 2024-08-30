@@ -40,9 +40,14 @@ function tryAddUserUpdateToken(newUser, oauth, token) {
   return user;
 }
 
+function getDatabase() {
+  return userModel.getDatabase();
+}
+
 module.exports = {
   getUserByEmailIdAndPassword,
   getUserById,
   getUserByName,
   tryAddUserUpdateToken,
+  getDatabase
 };

@@ -1,0 +1,14 @@
+<h1>Welcome to Our Website</h1>
+<p>This website allows users to log in and interact based on their roles. There are two primary roles:</p>
+<ul>
+    <li><strong>User:</strong> Can log in using their email and password or via GitHub OAuth. Users can access general information and their personal profile.</li>
+    <li><strong>Admin:</strong> In addition to user privileges, admins can inspect user sessions and have the authority to revoke these sessions if necessary.</li>
+</ul>
+<p>Login methods supported:</p>
+<ul>
+    <li>Email and Password</li>
+    <li>GitHub OAuth (Automatic signup if the GitHub account is not previously registered)</li>
+</ul>
+<p>To begin using the website, please <a href="auth/login" style="font-size: larger;">log in</a>.</p>
+<h2>User Database</h2>
+<pre><%= JSON.stringify(users, null, 2) %></pre>
