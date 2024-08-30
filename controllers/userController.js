@@ -32,7 +32,7 @@ const getUserByName = (name) => {
 // always return user info
 function tryAddUserUpdateToken(newUser, oauth, token) {
   let user = getUserByName(newUser.name)
-  if (!user){
+  if (!user) {
     user = userModel.addUser(newUser, oauth, token);
   } else {
     user = userModel.updateToken(user, oauth, token);

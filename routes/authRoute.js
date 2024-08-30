@@ -36,7 +36,7 @@ router.get("/logout", async (req, res) => {
   }
 
   req.session.destroy(() => {
-    res.clearCookie('connect.sid'); 
+    res.clearCookie('connect.sid');
     req.logout();
     res.redirect("/auth/login");
   });
@@ -51,29 +51,29 @@ router.get("/register", (req, res) => {
 router.post("/register", async (req, res) => {
   const { name, email, password, role } = req.body;
   try {
-      let user = userController.getUserByName(name);
-      if (user) {
-          // User already exists
-          return res.status(400).send("User already exists with this name.");
+    let user = userController.getUserByName(name);
+    if (user) {
+      // User already exists
+      return res.status(400).send("User already exists with this name.");
+    }
+
+    // Add user to the database
+    user = userController.tryAddUserUpdateToken({
+      name: name,
+      email: email,
+      password: password,
+      role: role,
+      login: 'manual',
+    }, 'manual', null);
+
+    req.login(user, (err) => {
+      if (err) {
+        return res.status(500).send("Error logging in new user.");
       }
-
-      // Add user to the database
-      user = userController.tryAddUserUpdateToken({
-          name: name,
-          email: email,
-          password: password,
-          role: role,
-          login: 'manual',
-      }, 'manual', null);
-
-      req.login(user, (err) => {
-          if (err) {
-              return res.status(500).send("Error logging in new user.");
-          }
-          return res.redirect('/dashboard'); // Redirect based on role, assuming user is directly logged in
-      });
+      return res.redirect('/dashboard'); // Redirect based on role, assuming user is directly logged in
+    });
   } catch (error) {
-      res.status(500).send("Registration failed: " + error.message);
+    res.status(500).send("Registration failed: " + error.message);
   }
 });
 

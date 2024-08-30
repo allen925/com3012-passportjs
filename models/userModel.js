@@ -56,14 +56,14 @@ const userModel = {
       user.token = token
     database.push(user);
     return user;
-  }, 
+  },
   updateToken: (user, oauth, token) => {
     let existingUser = database.find(u => u.name === user.name && u?.login === oauth);
 
     if (!existingUser) {
       throw new Error('User does not exists.');
     }
-    existingUser.token = token; 
+    existingUser.token = token;
     return existingUser;
   },
   getDatabase: () => {
