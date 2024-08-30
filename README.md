@@ -1,4 +1,4 @@
-# Revoke Authentication Project with express
+# Passportjs Authentication Project With Revoke Sessions
 
 A simple web application using Express, EJS, and Passport.js for authentication system. 
 
