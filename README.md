@@ -16,8 +16,7 @@ It's mainly designed as a demonstration of how admin can revoke user logged in s
 
 <br>
 
-- **Session Management**: Sessions are managed with `express-session`.
-- **EJS Templating**: Server-rendered views using EJS and Express layouts.
+- **Others**: Sessions are managed with `express-session`, Server-rendered views using EJS and Express layouts.
 
 ## Run the Code
 
@@ -42,6 +41,6 @@ GITHUB_CLIENT_SECRET=<your github secret>
 Once the application is running, navigate to http://localhost:8000 or port you specified in .env to access the site. 
 
 <br><br><br>
-side node: It's initial purpose is for
+side node: Its initial purpose is for
 com3012-passportjs
 BCIT react course comp 3012's passport js practice
